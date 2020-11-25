@@ -1,0 +1,825 @@
+<html>
+<body>
+<form id="form1" runat="server">
+        <asp:scriptmanager id="sd" runat="server" scriptmode="Release">
+        </asp:scriptmanager>
+        <div id="FindAdmit">
+            <div class="top_banner">
+                <div class="in_banner">
+                    <div class=" logo"=logo" style="width: 26%">
+                        <img alt="Neet" src="../Images/MDLogo.jpg" style="width: 90%; padding: 15px" />
+                    </div>
+                    <div class="" style="float: left; width: 40%; text-align: center">
+                        <h1>
+                            राष्ट्रीय पात्रता व प्रवेश परीक्षा (यूजी)
+                        </h1>
+                        <br />
+                        <h1>
+                            NATIONAL ELIGIBILITY CUM ENTRANCE TEST (UG)
+                        </h1>
+                    </div>
+                    <div class="glogo" style="width: 25%">
+                        <img alt="logo" src="../Images/NTA.png" style="width: 80%" />
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+            <div class="cleaner">
+            </div>
+            <div id="container" style="background-image: url('../Images/bg.jpg'); min-height: 420px;">
+                <center>
+                    <h2>
+                        Score Card NEET (UG) - 2020
+                    </h2>
+                </center>
+                <div class="mid_col" style="padding-top: 15px; float: inherit; width: 100%; text-align: center;
+                font-size: 20px">
+                    <table id="tblAppno" cellspacing="0" cellpadding="0" width="40%" style="border: 2px SOlid #000;
+                    margin: auto">
+                        <tr>
+                            <td width="30%">
+                                Enter Roll Number:
+                            </td>
+                            <td align="left" width="70%">
+                                <input type="text" id="txtrollno" maxlength="10" autocomplete="off" placeholder="Enter Roll Number" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%">
+                                Enter Date Of Birth (DOB):
+                            </td>
+                            <td align="left" width="70%">
+                                <input type="text" id="txtdob" maxlength="10" autocomplete="off" placeholder="Enter DOB(dd/mm/yyyy) " />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Enter Security Pin :
+                            </td>
+                            <td align="left">
+                                <input type="text" id="txtCaptcha" maxlength="6" autocomplete="off" placeholder="Enter Security Pin"   />
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Security&nbsp;Pin:
+                            </td>
+                            <td align="left">
+                                <img src="" id="imgCaptcha" width="120px" height="45px" />
+                                <img alt="Refresh Captcha" src="../Images/refresh.png" width="35px" height="35px"
+                                     style="cursor: pointer;" title="Refresh Captcha" onclick="UpdateCaptcha()" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%"></td>
+                            <td align="left" width="70%">
+                                <input type="button" id="Button1" value="Submit" class="btnSubmit" onclick="GetDetails();" />
+                                <input type="hidden" id="hdSecurityTicket" value="" />
+                            </td>
+                        </tr>
+                        <!--<tr>
+                             <td align="center" colspan="2" style="text-align: center;">
+                                <a href="NEETFINALKEY.pdf" target="_blank" id="Button2" style="font-size: 15px;
+                                    font-weight: bold; text-align: center;">Final Answer Keys of NEET (UG) - 2020</a>
+                            </td>
+                        </tr>-->
+                        <tr>
+                            <td colspan="2"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="cleaner">
+                </div>
+            </div>
+            <div>
+            </div>
+            <div class="cleaner">
+            </div>
+            <div id="footer">
+                <p>
+                    Disclaimer: This site is designed and hosted by NIC and the contents are provided
+                    by NTA and they may be contacted for any further information.
+                </p>
+            </div>
+        </div>
+        <div class="" style="width: 100%; margin-bottom: 10px">
+            <br />
+            <noscript>
+                <div align="center">
+                    JavaScript is disabled in your current browser. For full functionality of this site
+                    it is necessary to enable JavaScript. Here are the <a target="_blank" href="https://www.enable-javascript.com/">
+                        instructions how to enable JavaScript in your web browser
+                    </a>.
+                </div>
+            </noscript>
+            <table id="tblACDetails" cellspacing="0" cellpadding="0" width="94%" style="margin: auto;
+            display: none;">
+                <tr>
+                    <td valign="top">
+                        <table cellpadding="0" cellspacing="0" style="width: 100%; font-size: 1em; background-color: #Fff;
+                        border: 2px SOlid #034ea2;padding:5px;">
+                            <!---- border: 5px solid #999;-->
+                            <tr id="trprint">
+                                <td style="border-bottom: none; text-align: left" colspan="3" align="left" valign="top">
+                                    <a id="aPrint" href="javascript:printDiv('tblACDetails');">
+                                        <b>
+                                            Click Here to Print This
+                                            Page
+                                        </b>
+                                    </a>
+                                </td>
+                                <td style="border-left: none; text-align: right; border-bottom: none;" align="right"
+                                    valign="top">
+                                    <span id="lblbatch" style="color: Black; font-size: 12px; font-weight: bold"></span>
+                                    <!--                                <asp:label id="lblbatch" runat="server" font-size="12px" font-bold="true" visible="false"></asp:label>-->
+                                    <a id="aClose" href="ResultNEET.htm" target="_parent"><b><u>Generate Result</u></b></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border-right: none;" align="left" valign="top" colspan="4">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="50%" align="center" style="border-left: none;">
+                                                <img alt="neet"  style="padding: 5px; float: left;height: 35px;" src="../Images/MDLogo.jpg" />
+                                            </td>
+                                           
+                                            <td width="50%" align="right" style="border-left: none;">
+                                                <img alt="neet"  style="padding: 5px;height: 35px;" src="../Images/NTA.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100%" align="center" style="border-left: none; font-size: 13px;" colspan="2">
+                                                <h4>
+                                                    NATIONAL ELIGIBILITY CUM ENTRANCE TEST (UG) - <span id="lblyear" style="color: Black;
+                                                    font-weight: bold">Year</span>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100%" align="center" style="border-left: none; font-size: 13px;" colspan="2">
+                                                <h4>
+                                                    Score Card
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                       
+                                    </table>
+                                </td>
+                            </tr>
+                             
+                            <tr>
+                                <td colspan="4" align="center" valign="top" width="100%">
+                                    <table width="100%" align="center" cellpadding="0" cellspacing="0" style="font-family: verdana;
+                                    font-size: 12">
+                                        <tr>
+                                            <td style="width: 85%">
+                                                <table width="100%" style="height: 80px" border="1" class="admit_cardt" cellpadding="0"
+                                                       cellspacing="0">
+                                                    <tr>
+                                                        <td width="25%">
+                                                            Roll Number
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            <span id="lblrollno" style="color: Black; font-size: 1em; font-weight: bold">rollno</span>
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            Application No.
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            <span id="lblappno" style="color: Black; font-size: 1em; font-weight: bold">appno</span>
+                                                        </td>
+                                                        <td rowspan="4" style="text-align:center">
+                                                            <img id="VAQRCode" height="60px" />
+                                                        </td>
+                                                        <td rowspan="4" style="text-align:center">
+                                                            <img alt="" id="imgCandPhoto" height="80px" />
+                                                        </td>
+                                                        <!-- <td width="18%"  align=left>    Aadhaar Enrollment Number</td> -->
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="25%">
+                                                            Candidate's Name
+                                                        </td>
+                                                        <td colspan="1" align="left">
+                                                            <span id="lblcandName" style="color: Black; font-size: 1em;">CName</span>
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            Nationality
+                                                        </td>
+                                                        <td width="25%" align="left">
+                                                            <span id="lblnationality" style="color: Black; font-size: 1em;"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="25%">
+                                                            Mother's Name
+                                                        </td>
+                                                        <td colspan="1" align="left">
+                                                            <span id="lblmname" style="color: Black; font-size: 1em;">mname</span>
+                                                        </td>
+                                                        <td align="left">
+                                                            Date of Birth(DD/MM/YYYY)
+                                                        </td>
+                                                        <td align="left">
+                                                            <span id="lbldob" style="color: Black; font-size: 1em;">dob</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Father's Name
+                                                        </td>
+                                                        <td colspan="1" align="left">
+                                                            <span id="lblfname" style="color: Black; font-size: 1em;">mname</span>
+                                                        </td>
+                                                        <td align="left">
+                                                            Gender
+                                                        </td>
+                                                        <td align="left">
+                                                            <span id="lblgender" style="color: Black; font-size: 1em;">gender</span>
+                                                        </td>
+                                                       
+                                                    </tr>
+                                                    </table>
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                    <table width="100%" align="center" cellpadding="0" cellspacing="0" style="font-family: verdana;
+                                    font-size: 12">
+                                        <tr id="tdmarks">
+                                            <td style="width: 100%">
+                                                <table align="center" width="100%" cellspacing="0" border="1" cellpadding="0" style="font-family: verdana;
+                                                font-size: 14">
+                                                    <tr>
+                                                        <td colspan="2" style="width:50%;text-align:center">
+                                                            &nbsp;&nbsp;<b>Percentile Score Obtained</b>
+                                                        </td>
+                                                        <td rowspan="2" style="width:25%; text-align:center; font-weight:bold">
+                                                            Total Marks Obtained
+                                                            <br />
+                                                            (out of 720)
+                                                        </td>
+                                                        <td rowspan="2" style="width:25%">
+                                                            <b>
+                                                                &nbsp; <span id="lbltotal" style="color: Black; font-size: 1em; font-weight: bold">
+                                                                </span>
+                                                            </b>
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b> &nbsp;&nbsp;Physics</b>
+
+                                                        </td>
+                                                        <td align="left">
+                                                            <b>
+                                                                &nbsp; <span id="lblphysics" style="color: Black; font-size: 1em;">Physics</span>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left">
+                                                            <b>&nbsp;&nbsp;Chemistry</b>
+
+                                                        </td>
+                                                        <td align="left">
+                                                            <b>
+                                                                &nbsp; <span id="lblchemistry" style="color: Black; font-size: 1em;">Chemistry</span>
+                                                            </b>
+                                                        </td>
+                                                        <td rowspan="3" style="text-align:center; font-weight:bold">
+                                                            NEET All India Rank
+                                                        </td>
+                                                        <td  rowspan="3">
+                                                            <b>
+                                                                &nbsp; <span id="lblneetrank" style="color: Black; font-size: 12px; font-weight: bold">
+                                                                    Nettrank
+                                                                </span>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left">
+                                                            <b>&nbsp;&nbsp;Biology (Botany &amp; Zoology)</b>
+
+                                                        </td>
+                                                        <td align="left">
+                                                            <b>&nbsp; <span id="lblBio" style="color: Black; font-size: 1em;">botny</span> </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left">
+                                                            <b> &nbsp;&nbsp;Total</b>
+                                                        </td>
+                                                        <td align="left">
+                                                            <b>
+                                                                &nbsp; <span id="lblpercentile" style="color: Black; font-size: 1em; font-weight: bold">
+                                                                    Percentile
+                                                                </span>
+                                                            </b>
+                                                        </td>
+                                                        <!--<td valign="bottom" style="text-align:center">
+                        <b>   QR Code</b>
+                    </td>-->
+                                                    </tr>
+                                                </table>
+                                           <table align="center" width="100%" cellspacing="0" border="1" cellpadding="0" style="font-family: verdana;
+                                                font-size: 14">
+                                                    <tr>
+                                                        <td style="width:30%;text-align:left">
+                                                            <b>Total Marks Obtained (out of 720) in Words</b>
+                                                        </td>
+                                                        <td  style="width:70%; text-align:left; font-weight:bold">
+                                                            <b>
+                                                                &nbsp; <span id="lblTotalInFig" style="color: Black; font-size: 1em; font-weight: bold">
+                                                                </span>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width:30%;text-align:left">
+                                                            <b>Total Percentile Score Obtained in Words</b>
+                                                        </td>
+                                                        <td style="width:70%; text-align:left; font-weight:bold">
+                                                            <b>
+                                                                &nbsp;  <span id="lblPtileInFig" style="color: Black; font-size: 1em; font-weight: bold">
+                                                                </span>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                        <div id="divAIQCUT" style="margin-top: 5px">
+                                            <table width="100%" class="admit_cardt" align="center" cellspacing="0" cellpadding="0"
+                                                   style="font-family: verdana; font-size: 14">
+                                                <tr>
+                                                    <td>
+                                                        <h5>ALL INDIA QUOTA RANK (FOR 15% SEATS) </h5>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0" style="font-family: verdana;
+                                        font-size: 12px">
+                                                <tr>
+                                                    <td width="211" align="center">
+                                                        Overall Rank
+                                                    </td>
+                                                    <td align="center" width="223">
+                                                        Category
+                                                    </td>
+                                                    <td align="center" width="180">
+                                                        Category Rank
+                                                    </td>
+                                                    <td align="center" width="176">
+                                                        Category-PH Rank
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center">
+                                                        <span id="lbloverallrank" style="color: Black; font-size: 12px; font-weight: bold">overallrank</span>
+                                                    </td>
+                                                    <td align="center">
+                                                        <span id="lblcategory" style="color: Black; font-size: 12px; font-weight: bold">Category</span>
+                                                    </td>
+                                                    <td align="center">
+                                                        <span id="lblcategoryrank" style="color: Black; font-size: 12px; font-weight: bold">
+                                                            Categoryrank
+                                                        </span>
+                                                    </td>
+                                                    <td align="center">
+                                                        <span id="lblphrank" style="color: Black; font-size: 12px; font-weight: bold">Category</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table border="0" class="admit_cardt" align="center" width="100%" style="font-family: verdana;
+                                        font-size: 12px; margin-top: inherit">
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <h5>CUT - OFF PERCENTILE AND SCORE AS PER MCI/DCI REGULATIONS</h5>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table border="1" width="100%" class="admit_cardt" cellspacing="0" cellpadding="0"
+                                                   style="font-family: verdana; font-size: .8em">
+                                                <tr>
+                                                    <td width="5%" valign="top">
+                                                        <p>
+                                                            <strong>Category</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="20%" valign="top">
+                                                        <p align="center">
+                                                            <strong>Cut off Percentile</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="10%" valign="top">
+                                                        <p align="center">
+                                                            <strong>Cut off Score</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="15%" valign="top">
+                                                        <p align="center">
+                                                            <strong>No. of Candidates</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="5%" valign="top">
+                                                        <p>
+                                                            <strong>Category</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="20%" valign="top">
+                                                        <p align="center">
+                                                            <strong>Cut off Percentile</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="10%" valign="top">
+                                                        <p align="center">
+                                                            <strong>Cut off Score</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="15%" valign="top">
+                                                        <p align="center">
+                                                            <strong>No. of Candidates</strong>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="81" valign="top">
+                                                        <p>
+                                                            <strong>UR / EWS</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="140" valign="top">
+                                                        <p align="center">
+                                                            50<sup>th</sup> Percentile
+                                                        </p>
+                                                    </td>
+                                                    <td width="70" valign="top">
+                                                        <p align="center">
+                                                            <strong></strong>720-147
+                                                        </p>
+                                                    </td>
+                                                    <td width="98" valign="top">
+                                                        <p align="center">
+                                                            682406
+                                                        </p>
+                                                    </td>
+                                                    <td width="83" valign="top">
+                                                        <p>
+                                                            <strong>UR/EWS-PH</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="140" valign="top">
+                                                        <p align="center">
+                                                            45<sup>th</sup> Percentile
+                                                        </p>
+                                                    </td>
+                                                    <td width="70" valign="top">
+                                                        <p align="center">
+                                                            <strong></strong>146-129
+                                                        </p>
+                                                    </td>
+                                                    <td width="100" valign="top">
+                                                        <p align="center">
+                                                            99
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="81" valign="top">
+                                                        <p>
+                                                            <strong>OBC</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="140" valign="top">
+                                                        <p align="center">
+                                                            40<sup>th</sup> Percentile
+                                                        </p>
+                                                    </td>
+                                                    <td width="70" valign="top">
+                                                        <p align="center">
+                                                            <strong></strong>146-113
+                                                        </p>
+                                                    </td>
+                                                    <td width="98" valign="top">
+                                                        <p align="center">
+                                                            61265
+                                                        </p>
+                                                    </td>
+                                                    <td width="83" valign="top">
+                                                        <p>
+                                                            <strong>OBC-PH</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="140" valign="top">
+                                                        <p align="center">
+                                                            40<sup>th</sup> Percentile
+                                                        </p>
+                                                    </td>
+                                                    <td width="70" valign="top">
+                                                        <p align="center">
+                                                            <strong></strong>128-113
+                                                        </p>
+                                                    </td>
+                                                    <td width="100" valign="top">
+                                                        <p align="center">
+                                                            233
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="81" valign="top">
+                                                        <p>
+                                                            <strong>SC</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="140" valign="top">
+                                                        <p align="center">
+                                                            40<sup>th</sup> Percentile
+                                                        </p>
+                                                    </td>
+                                                    <td width="70" valign="top">
+                                                        <p align="center">
+                                                            <strong></strong>146-113
+                                                        </p>
+                                                    </td>
+                                                    <td width="98" valign="top">
+                                                        <p align="center">
+                                                            19572
+                                                        </p>
+                                                    </td>
+                                                    <td width="83" valign="top">
+                                                        <p>
+                                                            <strong>SC-PH</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="140" valign="top">
+                                                        <p align="center">
+                                                            40<sup>th</sup>Percentile
+                                                        </p>
+                                                    </td>
+                                                    <td width="70" valign="top">
+                                                        <p align="center">
+                                                            <strong></strong>128-113
+                                                        </p>
+                                                    </td>
+                                                    <td width="100" valign="top">
+                                                        <p align="center">
+                                                            70
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="81" valign="top">
+                                                        <p>
+                                                            <strong>ST</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="140" valign="top">
+                                                        <p align="center">
+                                                            40<sup>th</sup> Percentile
+                                                        </p>
+                                                    </td>
+                                                    <td width="70" valign="top">
+                                                        <p align="center">
+                                                            <strong></strong>146-113
+                                                        </p>
+                                                    </td>
+                                                    <td width="98" valign="top">
+                                                        <p align="center">
+                                                            7837
+                                                        </p>
+                                                    </td>
+                                                    <td width="83" valign="top">
+                                                        <p>
+                                                            <strong>ST-PH</strong>
+                                                        </p>
+                                                    </td>
+                                                    <td width="140" valign="top">
+                                                        <p align="center">
+                                                            40<sup>th</sup>Percentile
+                                                        </p>
+                                                    </td>
+                                                    <td width="70" valign="top">
+                                                        <p align="center">
+                                                            <strong></strong>128-113
+                                                        </p>
+                                                    </td>
+                                                    <td width="100" valign="top">
+                                                        <p align="center">
+                                                            18
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <table id="tblmsg" align="center" width="80%" style="font-family: verdana; font-size: 13;">
+                                            <td align="center">
+                                                <b><span id="lblmsg" style="color: #e03315; font-size: 14px;">appno</span> </b>
+                                            </td>
+                                        </table>
+
+
+
+                                    <table id="tblimpinfo" width="100%" class="important_information" style="font-family: verdana;
+                                    font-size: 9.5px;text-align:justify;text-justify: inter-word;">
+                                        <tr>
+                                            <td width="20"></td>
+                                            <td>
+                                                <b>IMPORTANT INFORMATION</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>1.</b>
+                                            </td>
+                                            <td>
+                                                Candidate’s particulars have been indicated as mentioned by her/him in the online application form, which is subject to verification by the admitting authorities.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>2.</b>
+                                            </td>
+                                            <td>
+                                                Candidate,  if found submitting wrong information or tampering this Score Card at any stage, will be considered as using unfair practices. NTA will cancel the candidature and take legal action as per applicable laws.
+
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td valign="top">
+                                                <b>3.</b>
+                                            </td>
+                                            <td>
+                                                Under UR Category, the candidates from other categories i.e. General-EWS, OBC, SC, ST and PH but meeting UR Cut off Percentile are also included.<br />
+                                                Category Rank takes into account all candidates of that category irrespective of Category Cut off Percentile.
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td valign="top">
+
+                                                <b>4.</b>
+                                            </td>
+                                            <td>
+
+                                                In case of two or more candidates obtaining equal marks in NEET (UG) - 2020, the
+                                                inter-se-merit of such candidates has been determined as per Chapter 13 {13.2}
+                                                of Information Bulletin of NEET (UG) -2020.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>5.</b>
+                                            </td>
+                                            <td>
+                                                NTA has declared only All India Rank and All India Quota Rank. Candidates may apply
+                                                to the designated Counselling Authorities as per their eligibility. NTA has no role
+                                                to play in it.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>6.</b>
+                                            </td>
+                                            <td>
+                                                Details of the various Counselling Authorities are given in Appendix-IV of Information
+                                                Bulletin. The same may also be confirmed from respective websites. NTA is not responsible
+                                                for change of any of the addresses though care has been taken to put correct addresses.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>7.</b>
+                                            </td>
+                                            <td>
+                                                Counselling Authorities will invite applications from the successful candidates
+                                                and prepare their own merit list as per their rules based on All India Rank.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>8.</b>
+                                            </td>
+                                            <td>
+                                                In NEET result, category of the candidates is as per details submitted by them
+                                                in online form. These have been used to prepare the Merit List for 15% All India
+                                                Quota seats. In case, if the category of candidate falls under any other category
+                                                in the State Category List, candidates may apply to designated Counseling Authorities
+                                                with their category as per State Category List, and designated Counselling Authorities
+                                                will verify the same. The same is the case with domicile. Domicile will be governed
+                                                by respective admitting authority rules. NTA will not change any details of the
+                                                candidates after declaration of result.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>9.</b>
+                                            </td>
+                                            <td>
+                                                All candidates are advised to remain in touch with the websites of Counselling Authorities
+                                                for updates.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>10.</b>
+                                            </td>
+                                            <td>
+                                                Qualified Candidates having Benchmark Disabilities may refer to Chapter 13 {13.1(a)}
+                                                of Information Bulletin.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <b>11.</b>
+                                            </td>
+                                            <td>
+                                                Qualifying in NEET (UG) - 2020 does not confer any right for admission in Medical/Dental
+                                                Colleges. Selection of qualified candidates in NEET (UG) - 2020 for admission to
+                                                Medical/Dental Colleges is subject to merit position and satisfying the admission
+                                                criteria as laid down in the rules of Central Government/State Government/Universities/Institutions
+                                                concerned.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" style="font-size:1em">
+                                                <b>Note:</b>
+                                            </td>
+                                            <td>
+                                                <table style="font-size:1em">
+                                                    <tr>
+                                                        <td>
+                                                            <b> 1.&nbsp;&nbsp;&nbsp;&nbsp;Percentile Scores </b>are based on the relative performance of all those who appeared
+                                                            for the examination.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="font-weight:bold">
+                                                            2.&nbsp;&nbsp;&nbsp;&nbsp;The Percentile scores of a Candidate have been calculated as follows:
+                                                            <br />
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>
+                                                                100 X Number of candidates appeared in the examination with raw score LESS than the
+                                                                candidate
+                                                            </u>
+                                                            <br />
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total number of the candidates appeared in the examination
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>3.&nbsp;&nbsp;&nbsp;&nbsp;Percentile Score </b> is not the same as percentage of marks obtained.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b> 4.&nbsp;&nbsp;&nbsp;&nbsp;Total Percentile Score </b> is <b> NOT</b> an aggregate or average of the Percentile Scores
+                                                            of individual subjects.
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr></tr>
+                                    </table>
+                                        <table width="100%" style="font-family: verdana; font-size: 12px">
+                                            <tr>
+                                                <td align="left">
+                                                    <b>
+                                                        DATE OF DECLARATION OF RESULT : <span id="lbldateofdec" style="color: Black; font-size: 14px;
+                                                font-weight: bold"></span>
+                                                    </b>
+                                                </td>
+                                                <td align="right">
+                                                    <b>Senior Director [NEET (UG)] </b>
+                                                </td>
+                                                <!--  <td>
+                 <img alt="Sign" src="../Images/sign11.jpg" style="width: 140px; height: 70px" /><br />
+                  </td>-->
+                                            </tr>
+                                            <!--  <tr>
+
+              </tr>-->
+                                        </table>
+                                        <span id="lblFooterText" style="font-size:5px">lblFooterText</span>
+                                    
+                                    
+                                    </table></td>
+                            </tr>
+                        </table>
+                  
+            <div id="divloading" class="LockOn">
+                <img src="../Images/loading.gif" width="100" height="100" style="margin-left: 45%;
+                margin-top: 20%;" />
+            </div>
+        </div>
+    </form>
+    </body>
+    </html>
